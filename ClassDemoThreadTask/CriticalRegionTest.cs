@@ -12,6 +12,17 @@ namespace ClassDemoThreadTask
         // Constant 
         private const bool IsParallel = true;
 
+        // solution 1 - using lock
+        private object lockObj = new object();
+
+        // solution 2 - using mutex
+        private Mutex mutex = new Mutex();
+
+        // solution 3 - semaphores
+        private Semaphore sem = new Semaphore(1, 1);
+
+
+
 
         // Shared resource
         private List<int> _primes;
@@ -78,7 +89,28 @@ namespace ClassDemoThreadTask
             {
                 if (IsPrime(i))
                 { 
+
+                    // no threadsafe
+                    //_primes.Add(i);
+
+
+                    // solution 1 - locks
+                    //lock (lockObj)
+                    //{ // only one thread
+                    //    _primes.Add(i);
+                    //}
+
+
+                    //// solution 2 - mutex
+                    //mutex.WaitOne();
+                    //_primes.Add(i);
+                    //mutex.ReleaseMutex();
+
+                    // solution 3 - semaphores
+                    sem.WaitOne();
                     _primes.Add(i);
+                    sem.Release();
+
                 }
             }
         }

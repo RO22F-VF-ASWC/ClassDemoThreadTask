@@ -17,11 +17,11 @@ namespace ClassDemoThreadTask
         {
             //StartThreadTest();
 
-            StartTaskTest();
+            //StartTaskTest();
 
 
-            //CriticalRegionTest critRegion = new CriticalRegionTest();
-            //critRegion.Start();
+            CriticalRegionTest critRegion = new CriticalRegionTest();
+            critRegion.Start();
         }
 
 
